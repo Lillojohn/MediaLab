@@ -37,10 +37,6 @@ class GroupOfPipes{
     
     // Update de 'pipeFactory'.
     pipeFactory.update();
-    
-    for(Pipe pipe : listOfPipes) {
-      println(pipe);
-    }
   }
   
   public void drawObject(){
