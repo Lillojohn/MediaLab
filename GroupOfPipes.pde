@@ -12,13 +12,35 @@ class GroupOfPipes{
     listOfPipes.add(pipe);
   }
   
+  // Kijkt naar alle pipes als er iets vernietigd moet worden.
+  public void clearPipes(){
+    for(int i = 0; i < listOfPipes.size(); i++) {
+       if(listOfPipes.get(i).getDestroy() == true){
+         destroyPipe(i);
+       }
+    }
+  }
+  
+  // Vernietigd 'Pipe'.
+  public void destroyPipe(int index){
+    listOfPipes.remove(index);
+  }
+  
   public void update(){
     // Update alle Pipes in de Arraylist 'listOfPipes'. 
     for(Pipe pipe : listOfPipes) {
       pipe.update();
     }
+    
+    // Zorgt ervoor dat pipes die niet in beeld zijn verwijdert wordt.
+    clearPipes();
+    
     // Update de 'pipeFactory'.
     pipeFactory.update();
+    
+    for(Pipe pipe : listOfPipes) {
+      println(pipe);
+    }
   }
   
   public void drawObject(){
