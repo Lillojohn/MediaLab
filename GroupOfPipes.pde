@@ -2,9 +2,9 @@ class GroupOfPipes{
   private ArrayList<Pipe> listOfPipes;
   private PipeFactory pipeFactory;
   
-  public GroupOfPipes(Collision collision){
+  public GroupOfPipes(Collision collision, Game game){
     listOfPipes = new ArrayList<Pipe>();
-    pipeFactory = new PipeFactory(this, collision);
+    pipeFactory = new PipeFactory(this, collision, game);
   }
   
   // Voegt een Pipe toe aan de arrayList 'listOfPipes'.

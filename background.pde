@@ -1,6 +1,6 @@
 class Background extends GameObject{
-  public Background(int xPosition, int yPosition, int widthImage, int heightImage){
-    super(xPosition, yPosition, widthImage, heightImage);
+  public Background(int xPosition, int yPosition, int widthImage, int heightImage, Game game){
+    super(xPosition, yPosition, widthImage, heightImage, game);
     _img = loadImage("fb-bg.png");;
   }
   

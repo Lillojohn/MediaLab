@@ -5,8 +5,8 @@ class Pipe extends GameObject implements ICollision{
   private Rectangle rectangleA;
   private Rectangle rectangleB;
   
-  public Pipe(int xPosition, int yPosition, int widthImage, int heightImage, Collision collision){
-    super(xPosition, yPosition, widthImage, heightImage);
+  public Pipe(int xPosition, int yPosition, int widthImage, int heightImage, Collision collision, Game game){
+    super(xPosition, yPosition, widthImage, heightImage, game);
     _img = loadImage("fb-pipes.png");
     _pipeTravelSpeed = 5;
     _destroy = false;
@@ -15,6 +15,7 @@ class Pipe extends GameObject implements ICollision{
     collision.addObject(this);
   }
   
+  // Update de rectangles;
   public void rectanglesUpdate(){
     rectangleA.setRectangle(_xPosition, _yPosition, _width, (_height / 10 * 4));
     rectangleB.setRectangle(_xPosition, (_height / 10 * 6), _width, _height);

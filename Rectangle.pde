@@ -14,7 +14,7 @@ class Rectangle {
     setHashMap();
   }
   
-  
+  // Update de rectangle van de objecten.
   public void setRectangle(int x, int y, int rectangleWidth, int rectangleHeight){
     _x = x;
     _y = y;
@@ -23,6 +23,7 @@ class Rectangle {
     setHashMap();
   }
   
+  // Hier wordt een HashMap aangemaakt.
   public void setHashMap(){
     map.put("x", _x);
     map.put("y", _y);
