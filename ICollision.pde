@@ -1,0 +1,3 @@
+interface ICollision {
+  void collision();
+}
