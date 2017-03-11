@@ -1,14 +1,14 @@
 class GameObject{
   protected PImage _img;
-  protected int _xPosition;
-  protected int _yPosition;
+  protected PVector _position;
+  protected PVector _velocity;
   protected int _width;
   protected int _height;
   
   public GameObject(int xPosition, int yPosition, int widthImage, int heightImage, Game game){
     _img = null;
-    _xPosition = xPosition;
-    _yPosition = yPosition;
+    _position = new PVector(xPosition, yPosition);
+    _velocity = new PVector(0, 0);
     _width = widthImage;
     _height = heightImage;
     
@@ -21,6 +21,6 @@ class GameObject{
   }
   
   public void drawObject(){
-    image (_img, _xPosition, _yPosition, _width, _height);
+    image (_img, _position.x, _position.y, _width, _height);
   }
 }
