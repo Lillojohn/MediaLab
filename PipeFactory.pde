@@ -4,12 +4,14 @@ class PipeFactory{
   private int _pipeCounter;
   private Collision _collision;
   private Game _game;
+  private int _randomSpawnTime;
   
   public PipeFactory(GroupOfPipes groupOfPipes, Collision collision, Game game){
     _groupOfPipes = groupOfPipes;
     _pipeCounter = 0;
     _collision = collision;
     _game = game;
+    changeRandomSpawnTime();
   }
   
   public void createPipe(){
@@ -23,15 +25,20 @@ class PipeFactory{
         createPipe();
     }    
   }
+  
+  public void changeRandomSpawnTime(){
+    _randomSpawnTime =  (int)random(30, 150);
+  }
  
   // Houdt bij wanneer er een nieuwe Pipe gespawnt moet worden.
   public boolean pipeDrawCounter(){
     _pipeCounter++;
     
-    if(_pipeCounter != 100){
+    if(_pipeCounter != _randomSpawnTime){
       return false;
     }
       
+    changeRandomSpawnTime();
     _pipeCounter = 0;
     return true;
   }
