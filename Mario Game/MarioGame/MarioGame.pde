@@ -2,6 +2,7 @@ private Mario Mario;
 private ArrayList<GameObject> listOfGameObjects;
 private LevelLayer currentLevel;
 private ObstacleManager _obstacleManager;
+private float _jumpPercentage;
 
 void setup(){
   size(600, 400);
@@ -14,7 +15,7 @@ void setup(){
   currentLevel = new LevelLayer(level, this);
   Mario = new Mario(20, 350, 20, 20, this);
   
-  _obstacleManager = new ObstacleManager(this);
+  _obstacleManager = new ObstacleManager(this, Mario);
   
   frameRate(50);
 }
@@ -51,6 +52,10 @@ void draw(){
   currentLevel.draw();
   
   update();
+}
+
+public void SetJumpPercentage(float percentage){
+  _jumpPercentage = percentage;
 }
 
 // Voeg een GameObject of kind daarvan toe aan de ArrayList 'listOfGameObjects'.

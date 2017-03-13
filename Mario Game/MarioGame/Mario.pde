@@ -6,7 +6,7 @@ class Mario extends GameObject {
   
   public Mario(int xPosition, int yPosition, int widthImage, int heightImage, MarioGame game) {
     super(xPosition, yPosition, widthImage, heightImage, game);
-    _img = loadImage("mario_sprite.png");
+    _img = loadImage("mariostand.png");
     _gravity = .3;
     _ground = 340;
     _jumpSpeed = 10;
@@ -45,6 +45,11 @@ class Mario extends GameObject {
   public void changeSpriteSpreadsheet(){
     
   }
+  
+  public float GetXPosition(){
+    return _position.x ;
+  }
+  
   
   
 }
