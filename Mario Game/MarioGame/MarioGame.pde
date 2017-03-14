@@ -7,6 +7,7 @@ private float _jumpPercentage;
 void setup(){
   size(600, 400);
   listOfGameObjects = new ArrayList<GameObject>();
+  _jumpPercentage = 0;
   
   int[] level = {
     1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,0,1,1,1
@@ -31,6 +32,8 @@ void keyPressed(){
   if (key == ' ')
   {
     Mario.jump = 1;
+    _obstacleManager.setResumeIsTrue(_jumpPercentage);
+    _jumpPercentage = 0; 
   }
 }
 
@@ -43,15 +46,20 @@ void keyReleased() {
 
 void draw(){
   background(99, 134, 251);
-  
+ 
+    
   // Drawt alle GameObjects in de Arraylist 'listOfGameObjects'.  
   for(GameObject object : listOfGameObjects) {
     object.drawObject();
   }
   
-  currentLevel.draw();
+     
+  if(_jumpPercentage < 90) {
+    update();
+  }
   
-  update();
+  
+    currentLevel.draw();
 }
 
 public void SetJumpPercentage(float percentage){
