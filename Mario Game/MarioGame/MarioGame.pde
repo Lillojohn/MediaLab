@@ -1,15 +1,22 @@
+import processing.serial.*;
+
 private Mario Mario;
 private ArrayList<GameObject> listOfGameObjects;
 private LevelLayer currentLevel;
 private ObstacleManager _obstacleManager;
 private float _jumpPercentage;
+private Serial myPort;  // The serial port
+
 
 void setup(){
   size(600, 400);
   listOfGameObjects = new ArrayList<GameObject>();
   
   int[] level = {
-    1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,0,1,1,1
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
   };
   
   currentLevel = new LevelLayer(level, this);
@@ -17,11 +24,24 @@ void setup(){
   
   _obstacleManager = new ObstacleManager(this, Mario);
   
+  // List all the available serial ports
+  printArray(Serial.list());
+  // Open the port you are using at the rate you want:
+  myPort = new Serial(this, Serial.list()[3], 9600);
+  
   frameRate(50);
 }
 
 public void update() {
   Mario.update();
+  unJump();
+  while (myPort.available() > 0) {
+    String inBuffer = myPort.readString();
+    if (inBuffer != null && inBuffer.contains("jump")) {
+      jump();
+      println("Jumping");
+    }
+  }
   currentLevel.update();
   _obstacleManager.update();
 }
@@ -30,15 +50,23 @@ public void update() {
 void keyPressed(){
   if (key == ' ')
   {
-    Mario.jump = 1;
+    jump();
   }
 }
 
 void keyReleased() {
   if (key == ' ')
   {
-    Mario.jump = 0;
+    unJump();
   }
+}
+
+void jump() {
+  Mario.jump = 1;
+}
+
+void unJump() {
+  Mario.jump = 0;
 }
 
 void draw(){
