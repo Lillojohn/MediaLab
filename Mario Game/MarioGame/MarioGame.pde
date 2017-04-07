@@ -11,6 +11,7 @@ private CollidableObjects _collidableObjects;
 private ArrayList<IUpdate> _objectsThatUpdate;
 private Background _background;
 private PointManager _pointmanager;
+private PointSystem _pointSystem;
 
 
 void setup(){
@@ -35,7 +36,10 @@ void setup(){
   
   _middleObjectDetector = new MiddleObjectDetector(this, _collidableObjects, character);
   
-  _pointmanager = new PointManager(this, character);
+  _pointSystem = new PointSystem(this); 
+  _pointmanager = new PointManager(this, character, _pointSystem);
+  
+  
   
   frameRate(50);
 }

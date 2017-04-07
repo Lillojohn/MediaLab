@@ -43,12 +43,14 @@ class GameCharacter extends GameObject implements IUpdate {
         }
       }
       
-      
       if(!GravityEffect() && !JumpEffect()){
-        _jump = false;
-        _animation = new Run(this);
+        _animation = new Run(this);   
       }
       
+      if(_jumpTimer > 140){
+        _jump = false;
+      }
+
       if(JumpEffect()){
         _position.y -= _jumpPower;
       }
@@ -107,7 +109,15 @@ class GameCharacter extends GameObject implements IUpdate {
       return _position.x;
     }
     
+    public float GetYPosition(){
+      return _position.y;
+    }
+    
     public float GetWidth(){
       return _width;
+    }
+    
+    public float GetHeight(){
+      return _height;
     }
 }

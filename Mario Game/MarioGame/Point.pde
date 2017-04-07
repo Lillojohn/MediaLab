@@ -2,6 +2,7 @@ class Point extends GameObject implements ICollidable{
   
   private MarioGame _game;
   private boolean _outOfScreen;
+  private boolean _hit;
   
   public Point(int xPosition, int yPosition, int widthImage, int heightImage, MarioGame game) {
     super(xPosition, yPosition, widthImage, heightImage, game);
@@ -11,6 +12,7 @@ class Point extends GameObject implements ICollidable{
     _height = 40;
     _img.resize(_width, _height);
     _outOfScreen = false;
+    _hit = false;
   }
   
   public void Update(){
@@ -38,6 +40,11 @@ class Point extends GameObject implements ICollidable{
     
   }
   
+  public void SetHit(){
+    _hit = true;
+    _img = null;
+  }
+  
   public void CheckIfOutOfScreen(){
     if(_position.x == (0-_width)){
       _outOfScreen = true;
@@ -46,5 +53,9 @@ class Point extends GameObject implements ICollidable{
   
   public boolean GetOutOfScreen(){
     return _outOfScreen;
+  }
+  
+  public boolean GetHit(){
+    return _hit;
   }
 }
