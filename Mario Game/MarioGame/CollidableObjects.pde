@@ -8,7 +8,6 @@ class CollidableObjects {
   
   public void AddToList(ICollidable object){
     _collidableObjects.add(object);
-    println(_collidableObjects);
   }
   
   public ArrayList<ICollidable> GetICollidableList(){

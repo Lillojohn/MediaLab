@@ -9,6 +9,8 @@ private Ground _ground;
 private MiddleObjectDetector _middleObjectDetector;
 private CollidableObjects _collidableObjects;
 private ArrayList<IUpdate> _objectsThatUpdate;
+private Background _background;
+private PointManager _pointmanager;
 
 
 void setup(){
@@ -18,9 +20,10 @@ void setup(){
   _collidableObjects =  new CollidableObjects();
   _jumpPercentage = 0;
   
+  _background = new Background(0, 0, width, height, this);
   
   //currentLevel = new LevelLayer(this);
-  character = new GameCharacter((width/2) - 20, 350, 80, 175, this);
+  character = new GameCharacter((width/2) - 20, 330, 80, 175, this);
   
   
   _obstacleManager = new ObstacleManager(this, character);
@@ -30,7 +33,9 @@ void setup(){
   // Open the port you are using at the rate you want:
   myPort = new Serial(this, Serial.list()[3], 9600);
   
-  _middleObjectDetector = new MiddleObjectDetector(this, _collidableObjects);
+  _middleObjectDetector = new MiddleObjectDetector(this, _collidableObjects, character);
+  
+  _pointmanager = new PointManager(this, character);
   
   frameRate(50);
 }
@@ -63,7 +68,7 @@ void draw(){
   }
   
      
-  if(_jumpPercentage < 85) {
+  if(_jumpPercentage < 81) {
     update();
   }
   

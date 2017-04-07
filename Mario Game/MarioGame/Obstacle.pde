@@ -1,4 +1,4 @@
-class Obstacle extends GameObject implements IUpdate {
+class Obstacle extends GameObject {
   
   private boolean _outOfScreen;
   private MarioGame _game;
@@ -6,17 +6,12 @@ class Obstacle extends GameObject implements IUpdate {
   public Obstacle(int xPosition, int yPosition, int widthImage, int heightImage, MarioGame game) {
     super(xPosition, yPosition, widthImage, heightImage, game);
     _game = game;
-    AddToUpdateList();
     _outOfScreen = false;
   }
   
   public void Update() {
     _position.x -= 1;
     CheckIfOutOfScreen();
-  }
-  
-  public void AddToUpdateList(){
-      _game.AddToUpdateList(this);
   }
   
   public void CheckIfOutOfScreen(){

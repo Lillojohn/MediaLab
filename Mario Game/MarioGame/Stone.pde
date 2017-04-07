@@ -7,6 +7,7 @@ class Stone extends Obstacle implements ICollidable {
     _img = loadImage("Assets/BlocksOne.png");
     _width = 75;
     _height = 75;
+    _img.resize(_width, _height);
     subscribeToCollidableObjects();
   }
   
