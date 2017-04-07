@@ -21,6 +21,11 @@ class GameObject{
   }
   
   public void drawObject(){
-    image (_img, _position.x, _position.y, _width, _height);
+    try {
+      image (_img, _position.x, _position.y, _width, _height); 
+    } catch (Exception e){
+      
+    }
   }
+  
 }

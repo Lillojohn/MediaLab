@@ -1,16 +1,21 @@
+import java.util.concurrent.ThreadLocalRandom;
+
 class ObstacleManager {
   
   private ArrayList<Obstacle> _obstacleList;
   private MarioGame _game;
-  private Mario _mario;
+  private GameCharacter _character;
   private boolean _resume;
+  private int _maxObstacles;
+  private int _obstacleCountWithDeletedObstacles;
   
-  public ObstacleManager(MarioGame game, Mario mario){
+  public ObstacleManager(MarioGame game, GameCharacter character){
     _obstacleList = new ArrayList<Obstacle>();
     _game = game;
-    _mario = mario;
+    _character = character;
     _resume = false;
-    AddObstacle();
+    _maxObstacles = 3;
+    _obstacleCountWithDeletedObstacles = 0;
   }
   
   public void update(){
@@ -18,6 +23,8 @@ class ObstacleManager {
       for(Obstacle obstacle : _obstacleList) {
         obstacle.update();
       }
+           
+      ManageObstacles();      
       
       clearObstacles();
       
@@ -38,15 +45,48 @@ class ObstacleManager {
     _obstacleList.remove(index);
   }
   
+  public void ManageObstacles(){
+    if(_obstacleList.size() < _maxObstacles){
+      AddObstacle();
+    }
+    
+    if(_obstacleCountWithDeletedObstacles > Math.pow(2, _maxObstacles)){
+      _maxObstacles++;
+    }
+  }
+  
   
   public void AddObstacle(){
+    _obstacleCountWithDeletedObstacles++;
     _resume = false;
-    _obstacleList.add(new Stone(400, 350, 20, 20, _game));
+    
+    int xPosition = width + ThreadLocalRandom.current().nextInt(0, 400 + 100);
+    
+    //if(_obstacleList.size() != 0){
+    //  xPosition = (int)_obstacleList.get(_obstacleList.size() - 1).GetXPosition() + ThreadLocalRandom.current().nextInt((width/2), 200 + 1);
+    //}
+    
+    tripleBlock(xPosition);
+  }
+  
+  public void singleBlock(int xPosition){
+    _obstacleList.add(new Stone(xPosition, height - 275, 0, 0, _game));
+  }
+  
+  public void doubleBlock(int xPosition){
+    _obstacleList.add(new Stone(xPosition, height - 275, 0, 0, _game));
+    _obstacleList.add(new Stone(xPosition+75, height - 275, 0, 0, _game));
+  }
+  
+  public void tripleBlock(int xPosition){
+    _obstacleList.add(new Stone(xPosition, height - 275, 0, 0, _game));
+    _obstacleList.add(new Stone(xPosition+75, height - 275, 0, 0, _game));
+    _obstacleList.add(new Stone(xPosition+75, height - 350, 0, 0, _game));
   }
   
   public void CheckDifferenceBetweenObstacleAndMario(){
     for(Obstacle obstacle : _obstacleList) {
-        float differenceBetweenMarioAndObstacle = obstacle.GetXPosition() - _mario.GetXPosition();
+        float differenceBetweenMarioAndObstacle = obstacle.GetXPosition() - _character.GetXPosition();
         jumpAlarm(differenceBetweenMarioAndObstacle);
      }
   }
@@ -60,7 +100,7 @@ class ObstacleManager {
   }
   
   public void setResumeIsTrue(float percentage){
-    if(percentage > 80){
+    if(percentage > 75){
       _resume = true;  
     }
   }

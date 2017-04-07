@@ -1,50 +1,45 @@
 import processing.serial.*;
 
-private Mario Mario;
+private GameCharacter character;
 private ArrayList<GameObject> listOfGameObjects;
-private LevelLayer currentLevel;
 private ObstacleManager _obstacleManager;
 private float _jumpPercentage;
 private Serial myPort;  // The serial port
+private Ground _ground;
+private MiddleObjectDetector _middleObjectDetector;
+private CollidableObjects _collidableObjects;
+private ArrayList<IUpdate> _objectsThatUpdate;
 
 
 void setup(){
-  size(600, 400);
+  size(900, 700);
+  _objectsThatUpdate = new ArrayList<IUpdate>();
   listOfGameObjects = new ArrayList<GameObject>();
+  _collidableObjects =  new CollidableObjects();
   _jumpPercentage = 0;
   
-  int[] level = {
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-  };
   
-  currentLevel = new LevelLayer(level, this);
-  Mario = new Mario(20, 350, 20, 20, this);
+  //currentLevel = new LevelLayer(this);
+  character = new GameCharacter((width/2) - 20, 350, 80, 175, this);
   
-  _obstacleManager = new ObstacleManager(this, Mario);
   
+  _obstacleManager = new ObstacleManager(this, character);
+  _ground = new Ground(0,height - 200, width, 200, this);
   // List all the available serial ports
   printArray(Serial.list());
   // Open the port you are using at the rate you want:
   myPort = new Serial(this, Serial.list()[3], 9600);
   
+  _middleObjectDetector = new MiddleObjectDetector(this, _collidableObjects);
+  
   frameRate(50);
 }
 
 public void update() {
-  Mario.update();
-  unJump();
-  while (myPort.available() > 0) {
-    String inBuffer = myPort.readString();
-    if (inBuffer != null && inBuffer.contains("jump")) {
-      jump();
-      println("Jumping");
-    }
+  // Drawt alle GameObjects in de Arraylist 'listOfGameObjects'.  
+  for(IUpdate object : _objectsThatUpdate) {
+    object.Update();
   }
-  currentLevel.update();
-  _obstacleManager.update();
 }
 
 // Als er op de spatiebalk wordt gedrukt dan wordt er true gereturned.
@@ -53,24 +48,10 @@ void keyPressed(){
   {
     _obstacleManager.setResumeIsTrue(_jumpPercentage);
     _jumpPercentage = 0; 
-    jump();
+    character.Jump();
   }
 }
 
-void keyReleased() {
-  if (key == ' ')
-  {
-    unJump();
-  }
-}
-
-void jump() {
-  Mario.jump = 1;
-}
-
-void unJump() {
-  Mario.jump = 0;
-}
 
 void draw(){
   background(99, 134, 251);
@@ -82,12 +63,12 @@ void draw(){
   }
   
      
-  if(_jumpPercentage < 90) {
+  if(_jumpPercentage < 85) {
     update();
   }
   
   
-    currentLevel.draw();
+    //currentLevel.draw();
 }
 
 public void SetJumpPercentage(float percentage){
@@ -97,4 +78,12 @@ public void SetJumpPercentage(float percentage){
 // Voeg een GameObject of kind daarvan toe aan de ArrayList 'listOfGameObjects'.
 public void addToGameObjectList(GameObject object){
   listOfGameObjects.add(object);
+}
+
+public void addToCollidableObjects(ICollidable object){
+  _collidableObjects.AddToList(object);
+}
+
+public void AddToUpdateList(IUpdate object){
+  _objectsThatUpdate.add(object);
 }

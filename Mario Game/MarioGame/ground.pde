@@ -1,12 +1,10 @@
-class Stone extends Obstacle implements ICollidable {  
+class Ground extends GameObject implements ICollidable {
   private MarioGame _game;
   
-  public Stone(int xPosition, int yPosition, int widthImage, int heightImage, MarioGame game) {
+  public Ground(int xPosition, int yPosition, int widthImage, int heightImage, MarioGame game) {
     super(xPosition, yPosition, widthImage, heightImage, game);
+    _img = loadImage("Assets/Ground.png");
     _game = game;
-    _img = loadImage("Assets/BlocksOne.png");
-    _width = 75;
-    _height = 75;
     subscribeToCollidableObjects();
   }
   
