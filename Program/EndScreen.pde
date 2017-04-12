@@ -11,6 +11,7 @@ String[][] COMMENTS = {
 };
 
 class EndScreen implements IState {
+  private Program _program;
   private PImage _background;
   private Box _box;
   private color _mainColor;
@@ -18,12 +19,18 @@ class EndScreen implements IState {
   private ArrayList<PImage> _nick;
   private ArrayList<PImage> _simon;
   private int _frame;
+  private int _time;
   
   public EndScreen(int totalJumps, int timestamp, int target, Program program) {
+    this._program = program;
+
     // Get background image and color.
     this._background = loadImage("../assets/background.jpg");
     this._background.resize(width, height);
     this._mainColor = color(160, 5, 28);
+
+    // Setup timer.
+    this._time = millis();
     
     // Setup box.
     noTint();
@@ -51,6 +58,12 @@ class EndScreen implements IState {
   
   public void update() {
     this._comment.update();
+
+    println(this._time, millis());
+
+    if (millis() > this._time + 10000 ) {
+      this._program.changeState(new Carousel(this._program));
+    }
   }
   
   public void draw() {
