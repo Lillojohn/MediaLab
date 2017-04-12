@@ -59,8 +59,6 @@ class EndScreen implements IState {
   public void update() {
     this._comment.update();
 
-    println(this._time, millis());
-
     if (millis() > this._time + 10000 ) {
       this._program.changeState(new Carousel(this._program));
     }
