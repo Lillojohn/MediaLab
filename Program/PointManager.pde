@@ -32,7 +32,7 @@ class PointManager implements IUpdate {
   }
   
   public boolean PointTiming(){
-    if(_pointTimer < 100){
+    if(_pointTimer < 200){
       return false;
     }
     
@@ -78,8 +78,8 @@ class PointManager implements IUpdate {
   }
   
   public void spawnPoint(){
-    int xPosition = width + ThreadLocalRandom.current().nextInt(100, 200 + 1);
-    int yPosition = height - 200 - ThreadLocalRandom.current().nextInt(100, 300 + 1);
+    int xPosition = width + ThreadLocalRandom.current().nextInt(200, 300 + 1);
+    int yPosition = height - 200 - ThreadLocalRandom.current().nextInt(200, 300 + 1);
     _pointList.add(new Point(xPosition, yPosition, 0, 0, _game));
   }
   

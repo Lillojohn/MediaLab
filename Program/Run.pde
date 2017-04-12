@@ -22,7 +22,7 @@ class Run implements Animation {
       _xChangeCount = 0;
     }
     
-    if(_timer > 2){
+    if(_timer > 0){
       changeImage(_xChangeCount);
       _timer = 0;
       _xChangeCount++;

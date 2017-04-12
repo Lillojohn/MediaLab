@@ -3,14 +3,12 @@ class GameThumbnail extends GameObjectFix {
   private int _maxWidth;
   private int _minWidth;
   private LevelNumber _LevelNumber;
-  private Level _level;
   
   public GameThumbnail(String thumbnail, int xPosition, int yPosition, int widthImage, int heightImage) {
     super(xPosition, yPosition, widthImage, heightImage);
     this._img = requestImage(thumbnail);
     this._maxWidth = widthImage + widthImage/8;
     this._minWidth = widthImage;
-    //this._level = level;
     
     // Initiate level number
     int levelWidth = 65;
@@ -90,9 +88,5 @@ class GameThumbnail extends GameObjectFix {
   
   public int getWidth() {
     return this._width;
-  }
-  
-  public Level getLevel() {
-    return this._level;
   }
 }

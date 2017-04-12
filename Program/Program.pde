@@ -17,7 +17,6 @@ void setup() {
 
 void update() {
   state.update();   
-  println(state.getClass());
   
   // Check if port is available and jump is printed in serial.
   while (myPort.available() > 0) {
