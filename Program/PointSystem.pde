@@ -5,9 +5,12 @@ class PointSystem implements IUpdate{
   private int _goal;
   private MusicScoreNote _musicScoreNote;
   private Program _program;
+  private PFont _font;
   
   public PointSystem(Game game, Program program){
     this._program = program;
+    this._font = loadFont("BrandonGrotesque-BlackItalic-120.vlw");
+    textFont(this._font, 32);
     _game = game;
     AddToUpdateList();
     _totalPoints = 0;
@@ -36,7 +39,7 @@ class PointSystem implements IUpdate{
     text("Verzamel", width / 2 - x, y);
     fill(255,255,255 );
     textSize(50);
-    text(_goal + "Coins", width / 2 - x - 40, y + 50);
+    text(_goal + " Coins", width / 2 - x - 40, y + 50);
   }
     
   public void AddToUpdateList(){
