@@ -25,8 +25,6 @@ void update() {
       this.state.action("jump");
     }
   }
-
-  println(frameRate);
 }
 
 void draw() {
