@@ -8,6 +8,7 @@ class ObstacleManager implements IUpdate{
   private boolean _resume;
   private int _maxObstacles;
   private int _obstacleCountWithDeletedObstacles;
+  private int _obstacleTimer;
 
   
   public ObstacleManager(Game game, GameCharacter character){
@@ -18,6 +19,7 @@ class ObstacleManager implements IUpdate{
     _resume = false;
     _maxObstacles = 3;
     _obstacleCountWithDeletedObstacles = 0;
+    _obstacleTimer = 0;
   }
   
   public void Update(){
@@ -31,6 +33,8 @@ class ObstacleManager implements IUpdate{
       clearObstacles();
       
       CheckDifferenceBetweenObstacleAndMario();
+
+      _obstacleTimer++;
   }
   
   
@@ -54,8 +58,9 @@ class ObstacleManager implements IUpdate{
   }
   
   public void ManageObstacles(){
-    if(_obstacleList.size() < _maxObstacles){
+    if(_obstacleTimer > 300){
       AddObstacle();
+      _obstacleTimer = 0;
     }
     
     if(_obstacleCountWithDeletedObstacles > Math.pow(2, _maxObstacles)){
