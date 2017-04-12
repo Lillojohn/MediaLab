@@ -52,7 +52,7 @@ class PointSystem implements IUpdate{
   }
   
   public void GameComplete(){
-    _program.changeState(new EndScreen(this._totalJumps, 0, _totalPoints, _program));
+    _program.changeState(new EndScreen(this._totalJumps, _game.GetGameTime(), _totalPoints, _program));
   }
 
   public void addJump() {

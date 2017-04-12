@@ -32,7 +32,7 @@ class PointManager implements IUpdate {
   }
   
   public boolean PointTiming(){
-    if(_pointTimer < 200){
+    if(_pointTimer < 150){
       return false;
     }
     

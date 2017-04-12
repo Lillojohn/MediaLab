@@ -17,7 +17,7 @@ class Point extends GameObject implements ICollidable{
   
   public void Update(){
     CheckIfOutOfScreen();
-    _position.x -= 2;
+    _position.x -= 3;
   }
   
   public float getPositionX(){

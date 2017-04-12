@@ -12,6 +12,7 @@ class Game implements IState {
   private PointSystem _pointSystem;
   private color _mainColor;
   private Program _program;
+  private TimeSystem _timesystem;
   
   public Game(Program program) {
     noTint();
@@ -39,6 +40,7 @@ class Game implements IState {
     _middleObjectDetector = new MiddleObjectDetector(this, _collidableObjects, character);
     
     _pointmanager = new PointManager(this, character, _pointSystem);
+    this._timesystem = new TimeSystem(this);
   }
   
   public void update() {
@@ -81,6 +83,10 @@ class Game implements IState {
       _jumpPercentage = 0; 
       character.Jump();
     }
+  }
+
+  public int GetGameTime(){
+    return this._timesystem.GetGameTime();
   }
 
   public void SetJumpPercentage(float percentage){

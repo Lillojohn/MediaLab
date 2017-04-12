@@ -10,7 +10,7 @@ class Obstacle extends GameObject {
   }
   
   public void Update() {
-    _position.x -= 2;
+    _position.x -= 3;
     CheckIfOutOfScreen();
   }
   
