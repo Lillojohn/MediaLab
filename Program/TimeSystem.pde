@@ -8,6 +8,6 @@ class TimeSystem{
 	}
 
 	public int GetGameTime(){
-		return  (int)(this._time / 1000.0);
+		return  (int)((millis() - this._time) / 1000.0);
 	}
 }
