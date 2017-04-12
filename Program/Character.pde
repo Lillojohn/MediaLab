@@ -17,10 +17,10 @@ class GameCharacter extends GameObject implements IUpdate {
       _spriteSheetBrokenDownInPieces = new ArrayList<PImage>();
       MakeSpriteSheetArray();
       _animation = new Run(this);
-      _gravity = 1;
+      _gravity = .3;
       _jumpTimer = 0;
       _jump = false;
-      _jumpPower = 6;
+      _jumpPower = 8;
       _gravityEmplifyer = 0;
     }
     
@@ -35,25 +35,33 @@ class GameCharacter extends GameObject implements IUpdate {
     
     public void Update(){
       _animation.changeAnimation();
-      if(!GravityEffect()){
-        _position.y += _gravityEmplifyer + _gravity;
-        
-        if(_jumpTimer > 80){
-        _gravityEmplifyer += _gravity + (0.5 * _gravityEmplifyer) - _gravityEmplifyer ;
-        }
-      }
-      
-      if(!GravityEffect() && !JumpEffect()){
-        _animation = new Run(this);   
-      }
-      
-      if(_jumpTimer > 140){
-        _jump = false;
+
+      if (!GravityEffect()) {
+        _velocity.y += _gravity;
+      } 
+
+      if (GravityEffect()) {
+        _velocity.y = 0; 
       }
 
-      if(JumpEffect()){
-        _position.y -= _jumpPower;
+      if(!GravityEffect() && !JumpEffect()){
+        _animation = new Run(this);
+        _jump = false;
       }
+      
+      // If on the ground and "jump" keyy is pressed set my upward velocity to the jump speed!
+      if (GravityEffect() && _jump != false)
+      {
+        _velocity.y = -_jumpPower;
+      }
+      
+      // We check the nextPosition before actually setting the position so we can
+      // not move the oldguy if he's colliding.
+      PVector nextPosition = new PVector(_position.x, _position.y);
+      nextPosition.add(_velocity);
+      
+      _position.y = nextPosition.y;
+
       
       _jumpTimer++;
     }
