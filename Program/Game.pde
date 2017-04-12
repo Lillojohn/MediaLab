@@ -27,16 +27,17 @@ class Game implements IState {
     listOfGameObjects = new ArrayList<GameObject>();
     _collidableObjects =  new CollidableObjects();
     _jumpPercentage = 0;
+
+    _pointSystem = new PointSystem(this, _program);   
     
     //currentLevel = new LevelLayer(this);
-    character = new GameCharacter((width/2) - 20, 330, 80, 175, this);
+    character = new GameCharacter((width/2) - 20, 330, 80, 175, this, _pointSystem);
     
     _obstacleManager = new ObstacleManager(this, character);
     _ground = new Ground(0,height - 200, width, 200, this);
     
     _middleObjectDetector = new MiddleObjectDetector(this, _collidableObjects, character);
     
-    _pointSystem = new PointSystem(this, _program); 
     _pointmanager = new PointManager(this, character, _pointSystem);
   }
   

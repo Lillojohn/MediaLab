@@ -6,15 +6,17 @@ class PointSystem implements IUpdate{
   private MusicScoreNote _musicScoreNote;
   private Program _program;
   private PFont _font;
+  private int _totalJumps;
   
   public PointSystem(Game game, Program program){
     this._program = program;
     this._font = loadFont("BrandonGrotesque-BlackItalic-120.vlw");
+    this._totalJumps = 0;
     textFont(this._font, 32);
     _game = game;
     AddToUpdateList();
     _totalPoints = 0;
-    _goal = 25;
+    _goal = 10;
     _musicScoreNote = new MusicScoreNote(width - 180, 55, 30, 30, game);
   }
   
@@ -51,6 +53,10 @@ class PointSystem implements IUpdate{
   }
   
   public void GameComplete(){
-    _program.changeState(new EndScreen(0, 0, _totalPoints, _program));
+    _program.changeState(new EndScreen(this._totalJumps, 0, _totalPoints, _program));
+  }
+
+  public void addJump() {
+    this._totalJumps++;
   }
 }

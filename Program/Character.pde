@@ -9,9 +9,11 @@ class GameCharacter extends GameObject implements IUpdate {
     private boolean _jump;
     private float _jumpPower;
     private float _gravityEmplifyer;
+    private PointSystem _pointSystem;
   
-    public GameCharacter(int xPosition, int yPosition, int widthImage, int heightImage, Game game){
+    public GameCharacter(int xPosition, int yPosition, int widthImage, int heightImage, Game game, PointSystem pointSystem){
       super(xPosition, yPosition, widthImage, heightImage, game);
+      this._pointSystem = pointSystem;
       _game = game;
       AddToUpdateList();
       _spriteSheetBrokenDownInPieces = new ArrayList<PImage>();
@@ -72,6 +74,7 @@ class GameCharacter extends GameObject implements IUpdate {
     
     public void Jump(){
       if(!_jump){
+        this._pointSystem.addJump();
         _animation = new Jump(this);
         _jumpTimer = 0;
         _gravityEmplifyer = 0;
