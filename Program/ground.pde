@@ -4,6 +4,7 @@ class Ground extends GameObject implements ICollidable {
   public Ground(int xPosition, int yPosition, int widthImage, int heightImage, Game game) {
     super(xPosition, yPosition, widthImage, heightImage, game);
     _img = loadImage("Assets/Ground.png");
+    _img.resize(widthImage, heightImage);
     _game = game;
     subscribeToCollidableObjects();
   }

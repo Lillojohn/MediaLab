@@ -21,6 +21,7 @@ class PointSystem implements IUpdate{
   }
   
   public void Update(){
+    textSize(32); 
     DrawScore(width - 150, 80);
     DrawGoal(100, 80);
     if(_goal == _totalPoints){
@@ -29,7 +30,6 @@ class PointSystem implements IUpdate{
   }
   
   public void DrawScore(int x, int y){
-    textSize(32);
     text(_totalPoints, 10 + x, y);
     fill(101, 22, 17 );
     text("/", 50 + x, y);
@@ -37,7 +37,6 @@ class PointSystem implements IUpdate{
   }
   
   public void DrawGoal(int x, int y){
-    textSize(32);
     text("Verzamel", width / 2 - x, y);
     fill(255,255,255 );
     textSize(50);

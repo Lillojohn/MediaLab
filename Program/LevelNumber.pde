@@ -5,7 +5,8 @@ class LevelNumber extends GameObjectFix {
   public LevelNumber(String level, int xPosition, int yPosition, int widthImage, int heightImage) {
     super(xPosition, yPosition, widthImage, heightImage);
     
-    this._img = requestImage("assets/levelNumber.png");
+    this._img = loadImage("assets/levelNumber.png");
+    this._img.resize(widthImage, heightImage);
   }
   
   public void update(PVector parentPosition, int parentWidth) {
@@ -15,9 +16,6 @@ class LevelNumber extends GameObjectFix {
   
   public void draw() {
     super.draw();
-    //stroke(0);
-    //fill(77, 194, 255);
-    //ellipse(this._position.x, this._position.y, this._width, this._height);
   }
   
   public float CalculatePosition(int axis, PVector parentPosition, int parentWidth) {

@@ -42,6 +42,8 @@ class Game implements IState {
   }
   
   public void update() {
+    println(frameRate);
+
     if(_jumpPercentage < 81) {
       // Drawt alle GameObjects in de Arraylist 'listOfGameObjects'.  
       for(IUpdate object : _objectsThatUpdate) {
