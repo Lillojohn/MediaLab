@@ -169,6 +169,9 @@ class Comment extends GameObjectFix {
   private float _textWidth;
   private float _doneTextWidth;
   private SoundFile _sound;
+  private float _duration;
+  private int _startTime;
+  private boolean _playing;
   
   public Comment(int xPosition, int yPosition, int widthImage, int heightImage, String text, String audio, Program program) {
     super(xPosition, yPosition, widthImage, heightImage);
@@ -187,7 +190,8 @@ class Comment extends GameObjectFix {
     
     // Setup sound.
     this._sound = new SoundFile(program, audio);
-    this._sound.play();
+    this._duration = this._sound.duration();
+    this._playing = false;
   }
   
   public void draw() {
@@ -197,5 +201,17 @@ class Comment extends GameObjectFix {
     textFont(_font, 40);
     fill(109, 10, 10);
     text(_doneText, this._position.x - this._doneTextWidth/2, this._position.y + 400);
+  }
+
+  public void update() {
+    if (!this._playing) {
+      this._playing = true;
+      this._startTime = millis();
+      this._sound.play();
+    }
+
+    if (millis() > this._startTime + this._duration * 1000 - 200 ) {
+      this._sound.stop();
+    }
   }
 }
