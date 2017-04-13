@@ -112,14 +112,6 @@ class Carousel implements IState {
     int thumbnailHeight = 200;
     int targetScore = 10;
     
-    //if(level == 2) {
-    //  targetScore = 25;
-    //} else if (level == 3) {
-    //  targetScore = 50;
-    //}
-    
-    //Level level = new Level();
-    
     GameThumbnail thumbnail = new GameThumbnail(image, xPosition, yPosition, thumbnailWidth, thumbnailHeight);
     _levels.add(thumbnail);
   }

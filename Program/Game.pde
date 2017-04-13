@@ -32,7 +32,7 @@ class Game implements IState {
     _pointSystem = new PointSystem(this, _program);   
     
     //currentLevel = new LevelLayer(this);
-    character = new GameCharacter((width/2) - 20, 330, 80, 175, this, _pointSystem);
+    character = new GameCharacter((width/2) - 20, 330, 96, 210, this, _pointSystem);
     
     _obstacleManager = new ObstacleManager(this, character);
     _ground = new Ground(0,height - 200, width, 200, this);

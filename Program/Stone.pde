@@ -5,8 +5,8 @@ class Stone extends Obstacle implements ICollidable {
     super(xPosition, yPosition, widthImage, heightImage, game);
     _game = game;
     _img = loadImage("Assets/BlocksOne.png");
-    _width = 75;
-    _height = 75;
+    _width = 90;
+    _height = 90;
     _img.resize(_width, _height);
     subscribeToCollidableObjects();
   }

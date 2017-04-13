@@ -30,7 +30,7 @@ class GameCharacter extends GameObject implements IUpdate {
       for(int i = 0; i < 25; i++){
         PImage _pimage = loadImage("Assets/nick-sprite.png");
         _pimage = _pimage.get(i*170,0,160,350);
-        _pimage.resize(80,175);
+        _pimage.resize(96,210);
         _spriteSheetBrokenDownInPieces.add(_pimage);
       }
     }

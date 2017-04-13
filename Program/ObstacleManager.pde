@@ -103,18 +103,18 @@ class ObstacleManager implements IUpdate{
   }
   
   public void singleBlock(int xPosition){
-    _obstacleList.add(new Stone(xPosition, height - 275, 0, 0, _game));
+    _obstacleList.add(new Stone(xPosition, height - 290, 0, 0, _game));
   }
   
   public void doubleBlock(int xPosition){
-    _obstacleList.add(new Stone(xPosition, height - 275, 0, 0, _game));
-    _obstacleList.add(new Stone(xPosition+75, height - 275, 0, 0, _game));
+    _obstacleList.add(new Stone(xPosition, height - 290, 0, 0, _game));
+    _obstacleList.add(new Stone(xPosition+90, height - 290, 0, 0, _game));
   }
   
   public void tripleBlock(int xPosition){
-    _obstacleList.add(new Stone(xPosition, height - 275, 0, 0, _game));
-    _obstacleList.add(new Stone(xPosition+75, height - 275, 0, 0, _game));
-    _obstacleList.add(new Stone(xPosition+75, height - 350, 0, 0, _game));
+    _obstacleList.add(new Stone(xPosition, height - 290, 0, 0, _game));
+    _obstacleList.add(new Stone(xPosition+90, height - 290, 0, 0, _game));
+    _obstacleList.add(new Stone(xPosition+90, height - 380, 0, 0, _game));
   }
   
   public void CheckDifferenceBetweenObstacleAndMario(){
