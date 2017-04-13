@@ -6,7 +6,8 @@ class GameThumbnail extends GameObjectFix {
   
   public GameThumbnail(String thumbnail, int xPosition, int yPosition, int widthImage, int heightImage) {
     super(xPosition, yPosition, widthImage, heightImage);
-    this._img = requestImage(thumbnail);
+    this._img = loadImage(thumbnail);
+    this._img.resize(widthImage, heightImage);
     this._maxWidth = widthImage + widthImage/8;
     this._minWidth = widthImage;
     
@@ -24,11 +25,11 @@ class GameThumbnail extends GameObjectFix {
     
     this.selected = this.isSelected();
     
-    if(this.selected && this._width <= this._maxWidth) {
-      this.grow();
-    } else if(!this.selected && this._width >= this._minWidth) {
-      this.minimize();
-    }
+    // if(this.selected && this._width <= this._maxWidth) {
+    //   this.grow();
+    // } else if(!this.selected && this._width >= this._minWidth) {
+    //   this.minimize();
+    // }
     
     // Update LevelNumber
     this._LevelNumber.update(this._position, this._width);
