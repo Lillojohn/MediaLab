@@ -15,7 +15,7 @@ class Obstacle extends GameObject {
   }
   
   public void CheckIfOutOfScreen(){
-    if(_position.x == (0-_width)){
+    if(_position.x <= (0-_width)){
       _outOfScreen = true;
     }
   }

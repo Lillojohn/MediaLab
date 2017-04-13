@@ -120,12 +120,14 @@ class ObstacleManager implements IUpdate{
   public void CheckDifferenceBetweenObstacleAndMario(){
     boolean focusOnOne = false;
     for(Obstacle obstacle : _obstacleList) {
-      if(!focusOnOne){
+      if(obstacle.GetXPosition() > (width/2) -20){
+        if(!focusOnOne){
         float differenceBetweenMarioAndObstacle = obstacle.GetXPosition() - (_character.GetXPosition() + _character.GetWidth());
         jumpAlarm(differenceBetweenMarioAndObstacle);
         focusOnOne = true;
       }
      }
+   }
   }
   
   public void jumpAlarm(float differenceBetweenMarioAndObstacle){
